@@ -9,23 +9,13 @@ rest = '<hr>
 <A name=8></a>2<br>
 Lorem Ipsum<br>
 '
-def get_words_total_80_chars(words)
-    count = 0
-    index = 0
-    array = []
-    while count<80 && index<words.length
-        w = words[index]
-        index+=1
-        count+=w.length
-        array.push w
-    end
-    #puts "#{array}"
-    #puts "#{words}"
-    return array
-end
 
-def pick_80_chars(words)
-    gw = get_words_total_80_chars(words)
+def pick_max_80_chars(words)
+    count = 0
+    gw = words.take_while do |w| 
+        count+=w.length+1
+        count<80 
+    end
     words.slice!(0,gw.length)
     return gw.join(' ')
 end
@@ -33,9 +23,9 @@ end
 def break_on_80_chars(line)
     words = line.split(' ')
     newline = []
-    newline.push pick_80_chars(words)
+    newline.push pick_max_80_chars(words)
     while words.length>0
-        newline.push pick_80_chars(words)
+        newline.push pick_max_80_chars(words)
     end
     return newline
 end
