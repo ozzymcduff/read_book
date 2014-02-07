@@ -6,7 +6,9 @@ module ReadBook
     require 'read_book/line'
     require 'read_book/lines'
     require 'read_book/match_exception'
+    require 'read_book/recognizers/content'
     require 'read_book/recognizers/recognize_content'
+    require 'read_book/recognizers/chapter'
     require 'read_book/recognizers/recognize_chapter'
     require 'read_book/read_html'
 end

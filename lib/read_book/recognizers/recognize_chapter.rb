@@ -1,7 +1,4 @@
 module ReadBook
-    class Chapter
-    end
-
     class RecognizeChapter
         def initialize
         end
