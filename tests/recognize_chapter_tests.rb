@@ -1,7 +1,7 @@
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 require 'read_book'
 require "test/unit"
-$contents = File.open(File.join(File.dirname(__FILE__),"sample_data","lorem_ipsum.txt"),'r').read
+$contents = File.open(File.join(File.dirname(__FILE__),"sample_data","chapter.html"),'r').read
 
 class RecognizeChapterTests < Test::Unit::TestCase
     def setup

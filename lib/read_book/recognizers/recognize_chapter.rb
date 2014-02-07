@@ -6,10 +6,24 @@ module ReadBook
         def initialize
         end
         def familiar(elements)
-            raise "!"
+            elements.peek do |el|
+                chew(el)
+            end
         end
         def familiar?(elements)
-            false
+            begin
+                elements.peek do |el|
+                    chew(el)
+                end
+                return true
+            rescue MatchException => e
+                return false         
+            end
+            return false
+        end
+        def chew(el)
+            c = Chapter.new
+            return c
         end
     end
 end

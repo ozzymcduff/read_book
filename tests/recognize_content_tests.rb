@@ -1,3 +1,4 @@
+# encoding: UTF-8
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 require 'read_book'
 require "test/unit"
