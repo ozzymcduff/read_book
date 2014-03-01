@@ -10,7 +10,13 @@ class RecognizeChapterTests < Test::Unit::TestCase
     def test_that_it_recognizes_chapter
         @c.familiar(ReadBook::ReadHtml.new($contents))
     end
+    def test_that_it_parses_chapter
+        c = @c.chew(ReadBook::ReadHtml.new($contents))
+        assert_equal "Lorem Ipsum", c.heading
+        assert_equal 1, c.number
+    end
+
     def test_should_not_recognize
-        assert !@c.familiar?(ReadBook::ReadHtml.new("\ntext\ntext\n"+$contents)), 'should not look familiar'
+        assert !@c.familiar?(ReadBook::ReadHtml.new("\ntext\ntext\n")), 'should not look familiar'
     end
 end

@@ -1,3 +1,4 @@
+require "nokogiri"
 module ReadBook
     class Line
         def initialize(line)
@@ -36,6 +37,9 @@ module ReadBook
         end
         def to_s
             @line 
+        end
+        def text
+            Nokogiri::XML.fragment(@line).xpath('.//text()').map(&:text).join(' ')
         end
     end
 end

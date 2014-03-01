@@ -13,7 +13,13 @@ require 'nokogiri'
             @lines.line
         end
         def peek
-            yield Lines.new(@lines.rest)
+            @lines.peek
+            #yield Lines.new(@lines.rest)
+        end
+        def peek_while
+            while yield @lines.peek
+                @lines.line
+            end
         end
 
         def map_children_to_tree(noko)

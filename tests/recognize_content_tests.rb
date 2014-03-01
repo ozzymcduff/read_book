@@ -18,9 +18,14 @@ class RecognizeContentsTests < Test::Unit::TestCase
         @c = ReadBook::RecognizeContents.new
     end
     def test_that_it_recognizes_simple_contents
-        @c.familiar(ReadBook::ReadHtml.new($contents))
+        assert @c.familiar(ReadBook::ReadHtml.new($contents))
+    end
+    def test_that_it_parses_simple_contents
+        contents = @c.chew(ReadBook::ReadHtml.new($contents))
+        assert_equal ["First","Second","Third"],contents.contents
+        assert_equal ["Chapter 1: First chapter","Chapter 2: Second chapter"],contents.chapters
     end
     def test_should_not_recognize
-        assert !@c.familiar?(ReadBook::ReadHtml.new("\ntext\ntext\n"+$contents)), 'should not look familiar'
+        assert !@c.familiar?(ReadBook::ReadHtml.new("\ntext\ntext\n")), 'should not look familiar'
     end
 end

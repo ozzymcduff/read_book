@@ -20,6 +20,11 @@ module ReadBook
             return false
         end
         
+        def rstrip(chars, txt)
+            chars = Regexp.escape(chars)
+            txt.gsub(/[#{chars}]+$/, "")
+        end
+
         def chew(el)
             c = Contents.new 
             el.line.hr
@@ -28,17 +33,19 @@ module ReadBook
             
             el.peek_while do |line|
                 line.many_dots?.tap do |m|
-                    c.contents.push(line.to_s) if m
+                    puts m
+                    c.contents.push(rstrip('.',m.to_s).rstrip) if m
                 end
             end
 
             nxt = el.peek
             while nxt.match?(/Chapter/)
                 firstline = el.line
-                if firstline.many_dots?
-                    c.chapters.push(firstline.to_s)
+                if firstline.many_dots? 
+                    c.chapters.push(rstrip('.',firstline.text))
                 elsif el.peek.many_dots?
-                    c.chapters.push(firstline.to_s+el.line.to_s)
+                    txt = "#{firstline.text} #{el.line.text}"
+                    c.chapters.push(rstrip('.',txt))
                 end
                 nxt = el.peek
             end
